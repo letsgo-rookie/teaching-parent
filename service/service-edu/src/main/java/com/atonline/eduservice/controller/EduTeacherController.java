@@ -3,11 +3,11 @@ package com.atonline.eduservice.controller;
 
 import com.atonline.eduservice.entity.EduTeacher;
 import com.atonline.eduservice.service.EduTeacherService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +19,8 @@ import java.util.List;
  * @author rookie
  * @since 2020-10-14
  */
+
+@Api(description = "讲师管理")
 @RestController
 @RequestMapping("/eduservice/edu-teacher")
 public class EduTeacherController {
@@ -26,9 +28,18 @@ public class EduTeacherController {
     @Autowired
     private EduTeacherService teacherService;
 
-    @GetMapping("/list")
+
+    @ApiOperation(value = "所有讲师列表")
+    @GetMapping("/findAll")
     public List<EduTeacher> list(){
         return teacherService.list(null);
+    }
+
+    @ApiOperation(value = "根据id逻辑删除讲师")
+    @DeleteMapping("{id}")
+    public boolean removeById(@ApiParam(name = "id", value = "讲师ID", required = true) @PathVariable String id){
+        boolean flag = teacherService.removeById(id);
+        return flag;
     }
 
 }
