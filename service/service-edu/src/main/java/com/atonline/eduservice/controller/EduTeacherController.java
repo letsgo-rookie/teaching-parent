@@ -5,6 +5,7 @@ import com.atonline.commonutils.R;
 import com.atonline.eduservice.entity.EduTeacher;
 import com.atonline.eduservice.entity.vo.TeacherQuery;
 import com.atonline.eduservice.service.EduTeacherService;
+import com.atonline.servicebase.exceptionhandler.onlineException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -73,6 +74,13 @@ public class EduTeacherController {
     public R pageTeacherCondition(@PathVariable Long current,
                                   @PathVariable Long limit,
                                   TeacherQuery teacherQuery) {
+        // 自定义异常处理
+//        try {
+//            int a = 10/0;
+//        }catch(Exception e) {
+//            throw new onlineException(20001,"出现自定义异常");
+//        }
+
         //创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current,limit);
 
@@ -98,6 +106,7 @@ public class EduTeacherController {
         if(!StringUtils.isEmpty(end)) {
             wrapper.le("gmt_create",end);
         }
+
 
         //调用方法实现条件查询分页
         teacherService.page(pageTeacher,wrapper);
