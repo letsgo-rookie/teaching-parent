@@ -26,9 +26,10 @@ import java.util.List;
  * @since 2020-10-14
  */
 
+@CrossOrigin(allowCredentials = "true")
 @Api(description = "讲师管理")
 @RestController
-@RequestMapping("/eduservice/edu-teacher")
+@RequestMapping(value = "/eduservice/edu-teacher")
 public class EduTeacherController {
 
     @Autowired
