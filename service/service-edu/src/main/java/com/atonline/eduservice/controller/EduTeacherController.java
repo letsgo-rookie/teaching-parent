@@ -40,7 +40,7 @@ public class EduTeacherController {
     //rest风格
     @ApiOperation(value = "所有讲师列表")
     @GetMapping("/findAll")
-    public R list(){
+    public R list() {
         List<EduTeacher> list = teacherService.list(null);
         return R.ok().data("items", list);
     }
@@ -48,7 +48,7 @@ public class EduTeacherController {
     // 逻辑删除讲师的方法
     @ApiOperation(value = "根据id逻辑删除讲师")
     @DeleteMapping("{id}")
-    public R removeById(@ApiParam(name = "id", value = "讲师ID", required = true) @PathVariable String id){
+    public R removeById(@ApiParam(name = "id", value = "讲师ID", required = true) @PathVariable String id) {
         teacherService.removeById(id);
         return R.ok();
     }
@@ -61,12 +61,12 @@ public class EduTeacherController {
     public R pageList(@ApiParam(name = "page", value = "当前页码", required = true)
                       @PathVariable Long current,
                       @ApiParam(name = "limit", value = "每页记录数", required = true)
-                      @PathVariable Long limit){
+                      @PathVariable Long limit) {
         Page<EduTeacher> pageParam = new Page<>(current, limit);
         teacherService.page(pageParam, null);
         List<EduTeacher> records = pageParam.getRecords();
         long total = pageParam.getTotal();
-        return  R.ok().data("total", total).data("rows", records);
+        return R.ok().data("total", total).data("rows", records);
     }
 
     //条件查询带分页的方法
@@ -83,7 +83,7 @@ public class EduTeacherController {
 //        }
 
         //创建page对象
-        Page<EduTeacher> pageTeacher = new Page<>(current,limit);
+        Page<EduTeacher> pageTeacher = new Page<>(current, limit);
 
         //构建条件
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
@@ -94,27 +94,27 @@ public class EduTeacherController {
         String begin = teacherQuery.getBegin();
         String end = teacherQuery.getEnd();
         //判断条件值是否为空，如果不为空拼接条件
-        if(!StringUtils.isEmpty(name)) {
+        if (!StringUtils.isEmpty(name)) {
             //构建条件
-            wrapper.like("name",name);
+            wrapper.like("name", name);
         }
-        if(!StringUtils.isEmpty(level)) {
-            wrapper.eq("level",level);
+        if (!StringUtils.isEmpty(level)) {
+            wrapper.eq("level", level);
         }
-        if(!StringUtils.isEmpty(begin)) {
-            wrapper.ge("gmt_create",begin);
+        if (!StringUtils.isEmpty(begin)) {
+            wrapper.ge("gmt_create", begin);
         }
-        if(!StringUtils.isEmpty(end)) {
-            wrapper.le("gmt_create",end);
+        if (!StringUtils.isEmpty(end)) {
+            wrapper.le("gmt_create", end);
         }
 
 
         //调用方法实现条件查询分页
-        teacherService.page(pageTeacher,wrapper);
+        teacherService.page(pageTeacher, wrapper);
 
         long total = pageTeacher.getTotal();//总记录数
         List<EduTeacher> records = pageTeacher.getRecords(); //数据list集合
-        return R.ok().data("total",total).data("rows",records);
+        return R.ok().data("total", total).data("rows", records);
     }
 
     //添加讲师接口的方法
@@ -122,7 +122,7 @@ public class EduTeacherController {
     @PostMapping("addTeacher")
     public R addTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean save = teacherService.save(eduTeacher);
-        if(save) {
+        if (save) {
             return R.ok();
         } else {
             return R.error();
@@ -134,7 +134,7 @@ public class EduTeacherController {
     @GetMapping("getTeacher/{id}")
     public R getTeacher(@PathVariable String id) {
         EduTeacher eduTeacher = teacherService.getById(id);
-        return R.ok().data("teacher",eduTeacher);
+        return R.ok().data("teacher", eduTeacher);
     }
 
     //讲师修改功能
@@ -142,7 +142,7 @@ public class EduTeacherController {
     @PostMapping("updateTeacher")
     public R updateTeacher(@RequestBody EduTeacher eduTeacher) {
         boolean flag = teacherService.updateById(eduTeacher);
-        if(flag) {
+        if (flag) {
             return R.ok();
         } else {
             return R.error();

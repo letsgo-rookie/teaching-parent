@@ -18,34 +18,28 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 课程科目
+ * 课程简介
  * </p>
  *
  * @author rookie
- * @since 2020-10-21
+ * @since 2020-10-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "EduSubject对象", description = "课程科目")
-public class EduSubject implements Serializable {
+@ApiModel(value = "EduCourseDescription对象", description = "课程简介")
+public class EduCourseDescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程类别ID")
-    @TableId(value = "id", type = IdType.ID_WORKER_STR)
+    @ApiModelProperty(value = "课程ID")
+    @TableId(value = "id", type = IdType.INPUT)
     private String id;
 
-    @ApiModelProperty(value = "类别名称")
-    private String title;
+    @ApiModelProperty(value = "课程简介")
+    private String description;
 
-    @ApiModelProperty(value = "父ID")
-    private String parentId;
-
-    @ApiModelProperty(value = "排序字段")
-    private Integer sort;
-
-    @ApiModelProperty(value = "创建时间", example = "2019-01-01 8:00:00")
+    @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 

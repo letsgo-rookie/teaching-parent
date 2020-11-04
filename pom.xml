@@ -4,10 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>service</module>
-        <module>service-edu</module>
+        <!--
+        <module>service/service-edu</module>
+        <module>service/service-oss</module> -->
         <module>common</module>
-        <module>common/service-base</module>
-        <module>common/common-utils</module>
+        <!--<module>common/service-base</module>
+        <module>common/common-utils</module>-->
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
